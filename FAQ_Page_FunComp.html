@@ -20,38 +20,62 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        let MyFunComp = (props)=>{
-            let dataTarget = `#${props.num}`
+      let faq_obj = [
+          {
+            question:"01. I don't remember my password?",
+            answer: "Click 'Forget password' and create a new password. "
+          },
+          {
+            question:"02. How can I create an account at your site?",
+            answer: "Click on 'Login & Sign up' at the top of the page. Then fill out your information in the 'Create an account' section and click the 'Sign Up' button. You can also create an account directly after placing an order. Your delivery address and the order details will then be saved in your account."
+          },
+          {
+            question:"03. What are your delivery hours?",
+            answer: "We deliver from 9:00 am - 4:00 pm."
+          },
+          {
+            question:"01. I don't remember my password?",
+            answer: "It usually takes 5-7 business days."
+          },
+          {
+            question: "04. How much time it takes to deliver the order?",
+            answer: "Click track my order and input your order number."
+          }
+        ]
+        
+        let MyFunComp = ()=>{
+           
             return (
+              <> 
+               {faq_obj.map((item,index) => {
+                let id = `#${index+1}`
+                let headingId =  `heading${index+1}`
+                return (
                   <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingOne">
-                      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target= {dataTarget} aria-expanded="true" aria-controls="collapseOne">
-                        {props.question}
+                    <h2 className="accordion-header" id={headingId}>
+                      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target= {id} aria-expanded="true" aria-controls={index+1}>
+                        {item.question}
                       </button>
                     </h2>
-                    <div id={props.num} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#root">
+                    <div id={index+1} className="accordion-collapse collapse" aria-labelledby={headingId} data-bs-parent="#root">
                       <div className="accordion-body">
-                        {props.answer}
+                        {item.answer}
                       </div>
                     </div>
-                  </div>  
+                  </div> 
+                )
+               })}
+                   
+                </>
             )
         }
-        let faq_obj = {
-            "01. I don't remember my password?":" Click 'Forget password' and create a new password. ",
-            "02. How can I create an account at your site?":"Click on 'Login & Sign up' at the top of the page. Then fill out your information in the 'Create an account' section and click the 'Sign Up' button. You can also create an account directly after placing an order. Your delivery address and the order details will then be saved in your account.",
-            "03. What are your delivery hours?":"We deliver from 9:00 am - 4:00 pm.",
-            "04. How much time it takes to deliver the order?":"It usually takes 5-7 business days.",
-            "05. How do I know status of my order?":"Click track my order and input your order number."
-        }
-        let faq_arr = Object.entries(faq_obj)
+        
+
+       
         let root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<><MyFunComp question={faq_arr[0][0]} answer={faq_arr[0][1]}num={1}/>
-        <MyFunComp question={faq_arr[1][0]} answer={faq_arr[1][1]} num={2}/>
-        <MyFunComp question={faq_arr[2][0]} answer={faq_arr[2][1]} num={3}/>
-        <MyFunComp question={faq_arr[3][0]} answer={faq_arr[3][1]} num={4}/>
-        <MyFunComp question={faq_arr[4][0]} answer={faq_arr[4][1]} num={5}/>
-        </>)
+        root.render(<MyFunComp/>)
+       
+  
     </script>
 </body>
 </html>
